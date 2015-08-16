@@ -1,0 +1,6 @@
+.sencha/*
+build/
+packages/
+sass/
+touch/
+cordova/*
