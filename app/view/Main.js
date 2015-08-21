@@ -16,12 +16,12 @@ Ext.define('senchaApp1.view.Main', {
                 items: [{
                     docked: 'top',
                     xtype: 'titlebar',
-                    title: '调用百度地图'
+                    title: '聆听'
                     },{
                       xtype:'panel',
                       id:'allmap',
                       flex:1
-                    },
+                    }
                     /*{
                         html: 'Some wonderful information',
                         style: 'background-color: #5E99CC;',
@@ -37,17 +37,25 @@ Ext.define('senchaApp1.view.Main', {
                 styleHtmlContent: true,
                 scrollable: true,
 
-                items: {
+                items: [{
                     docked: 'top',
                     xtype: 'titlebar',
                     title: 'Welcome to Sencha Touch 2'
-                },
+                    },
+                    {
+                     xtype: 'audio',
+                     url: 'resources/mp3/04.mp3',
+                     id: 'sound1',
+                     autoplay:true,
+                     //hidden:true
+                    }
+                ]/*,
 
                 html: [
                     "You've just generated a new Sencha Touch 2 project. What you're looking at right now is the ",
                     "contents of <a target='_blank' href=\"app/view/Main.js\">app/view/Main.js</a> - edit that file ",
                     "and refresh to change what's rendered here."
-                ].join("")
+                ].join("")*/
             }]
 
     } 
