@@ -3,4 +3,7 @@ build/
 packages/
 sass/
 touch/
-cordova/*
+cordova/hooks/*
+cordova/platforms/*
+cordova/plugins/*
+cordova/www/*

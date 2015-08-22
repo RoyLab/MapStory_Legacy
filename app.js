@@ -9,6 +9,10 @@
     changes and its generated code, it will produce a "merge conflict" that you
     will need to resolve manually.
 */
+/*document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    alert(Media);
+}*/
 
 Ext.application({
     name: 'senchaApp1',
@@ -45,12 +49,17 @@ Ext.application({
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('senchaApp1.view.Main'));
-        if (Ext.os.is.Android) alert("Android");
-        else confirm('hoho');
+
         var map2 = new BMap.Map("allmap");    // 创建Map实例
         map2.centerAndZoom("上海");  // 初始化地图,设置中心点坐标和地图级别
-        map2.addControl(new BMap.MapTypeControl());   //添加地图类型控件
         map2.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+        var media = new Media('/android_asset/www/resources/mp3/04.mp3');
+
+        //function onSuccess(){alert('end');}
+        //function onErr(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
+
+        media.play();
     },
 
     onUpdated: function() {

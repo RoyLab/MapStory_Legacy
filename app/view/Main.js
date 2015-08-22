@@ -44,14 +44,14 @@ Ext.define('senchaApp1.view.Main', {
                     },
                     {
                      xtype: 'audio',
-                     url: 'resources/mp3/04.mp3',
+                     url: 'http://cdn.y.baidu.com/yinyueren/b02ee89bcc86048871e7cb311865282d.mp3',
                      id: 'sound1',
                      autoplay:true,
                      //hidden:true
                     }
-                ]/*,
-
-                html: [
+                ],
+                html: '<img style="height: 200px; width: 300px;" src="resources/images/01.jpg" />'
+                /*html: [
                     "You've just generated a new Sencha Touch 2 project. What you're looking at right now is the ",
                     "contents of <a target='_blank' href=\"app/view/Main.js\">app/view/Main.js</a> - edit that file ",
                     "and refresh to change what's rendered here."
