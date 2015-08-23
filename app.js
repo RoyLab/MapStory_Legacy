@@ -53,16 +53,17 @@ Ext.application({
         var position=new AMap.LngLat(121.44114,31.031569);
         //var b = new BMap.Bounds(new BMap.Point(121.43009,31.020088),
         //    new BMap.Point(121.462681,31.045555));
+
         map = new AMap.Map('allmap', {
             view: new AMap.View2D({//创建地图二维视口
               center:position,//创建中心点坐标
               zoom:14, //设置地图缩放级别
-              rotation:30 //设置地图旋转角度
+              rotation:15 //设置地图旋转角度
              }),
             resizeEnable: true,
-            rotationEnable: true
+            rotateEnable: true
         });
-        /*map.plugin('AMap.Geolocation', function () {
+        map.plugin('AMap.Geolocation', function () {
             geolocation = new AMap.Geolocation({
                 enableHighAccuracy: true,//是否使用高精度定位，默认:true
                 timeout: 10000,          //超过10秒后停止定位，默认：无穷大
@@ -117,7 +118,7 @@ Ext.application({
             }
             str += '</p>';
             result.innerHTML = str;
-        };*/
+        };
 
         var media = new Media('/android_asset/www/resources/mp3/04.mp3');
         media.play();
