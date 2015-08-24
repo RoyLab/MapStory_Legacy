@@ -50,20 +50,28 @@ Ext.application({
         // Initialize the main view
         Ext.Viewport.add(Ext.create('senchaApp1.view.Main'));
 
-        /*if (Ext.os.is.Android || Ext.os.is.ios)
+        if (Ext.os.is.Android)
         {
-            function onSuccess(heading) {
-                alert('Heading: ' + heading.magneticHeading);
-            };
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+            navigator.compass.watchHeading(onSuccess, onError);
+        }
 
-            function onError(error) {
-                alert('CompassError: ' + error.code);
-            };
+        // onSuccess: Get the current heading
+        //
+        function onSuccess(heading) {
+            //alert('Heading: ' + heading.magneticHeading);
+        }
 
-            navigator.compass.getCurrentHeading(onSuccess, onError);
-        }*/
+        // onError: Failed to get the heading
+        //
+        function onError(compassError) {
+            //alert('Compass Error: ' + compassError.code);
+        }
+        }
 
-        var position=new AMap.LngLat(121.44114,31.031569);
+        var position=new AMap.LngLat(118.850003,31.940681);
+        // SJTU: 121.44114,31.031569
         //var b = new BMap.Bounds(new BMap.Point(121.43009,31.020088),
         //    new BMap.Point(121.462681,31.045555));
 
@@ -91,6 +99,8 @@ Ext.application({
                 zoomToAccuracy:true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
             });
             map.addControl(geolocation);
+            geolocation.watchPosition();
+            if (window.console && console.log) { console.log('Log output'); }
             AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
             AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
         });
@@ -111,7 +121,7 @@ Ext.application({
             str += '<div>纬度：' + data.position.getLat() + '</div>'; 
             str += '<div>精度：' + data.accuracy + ' 米</div>';
             str += '<div>是否经过偏移：' + (data.isConverted ? '是' : '否') + '</div>';
-            alert(str);
+            //alert(str);
         };
         //解析定位错误信息
         function onError (data) {
@@ -135,10 +145,13 @@ Ext.application({
             result.innerHTML = str;
         };
 
-        var media = new Media('/android_asset/www/resources/mp3/04.mp3');
-        media.play();
-        //function onSuccess(){alert('end');}
-        //function onErr(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
+        if (Ext.os.is.Android)
+        {
+            var media = new Media('/android_asset/www/resources/mp3/04.mp3');
+            //media.play();
+            //function onSuccess(){alert('end');}
+            //function onErr(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
+        }
     },
 
     onUpdated: function() {
