@@ -1,5 +1,5 @@
 Ext.define('senchaApp1.view.Main', {
-    extend: 'Ext.Panel',
+    extend: 'Ext.tab.Panel',
     xtype: 'main',
     requires: [
         'Ext.TitleBar'

@@ -50,6 +50,19 @@ Ext.application({
         // Initialize the main view
         Ext.Viewport.add(Ext.create('senchaApp1.view.Main'));
 
+        /*if (Ext.os.is.Android || Ext.os.is.ios)
+        {
+            function onSuccess(heading) {
+                alert('Heading: ' + heading.magneticHeading);
+            };
+
+            function onError(error) {
+                alert('CompassError: ' + error.code);
+            };
+
+            navigator.compass.getCurrentHeading(onSuccess, onError);
+        }*/
+
         var position=new AMap.LngLat(121.44114,31.031569);
         //var b = new BMap.Bounds(new BMap.Point(121.43009,31.020088),
         //    new BMap.Point(121.462681,31.045555));
@@ -81,6 +94,8 @@ Ext.application({
             AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
             AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
         });
+
+        //UiSettings.setCompassEnabled(true);
         //获取当前位置信息
         function getCurrentPosition () {
             geolocation.getCurrentPosition();
@@ -96,7 +111,7 @@ Ext.application({
             str += '<div>纬度：' + data.position.getLat() + '</div>'; 
             str += '<div>精度：' + data.accuracy + ' 米</div>';
             str += '<div>是否经过偏移：' + (data.isConverted ? '是' : '否') + '</div>';
-            result.innerHTML = str;
+            alert(str);
         };
         //解析定位错误信息
         function onError (data) {

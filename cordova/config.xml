@@ -18,14 +18,17 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
-        <icon src="/www/resources/images/icon.png" density="port-hdpi"/>
-        <splash src="/www/resources/images/icon.png" density="port-ldpi"/>
-        <splash src="/www/resources/images/icon.png" density="port-mdpi"/>
-        <splash src="/www/resources/images/icon.png" density="port-xhdpi"/>
+        <icon src="/www/resources/images/icon.png"/>
         <splash src="/www/resources/images/icon.png"/>
+        <feature name="Compass">
+            <param name="android-package" value="org.apache.cordova.CompassListener" />
+        </feature>
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
+        <feature name="Compass">
+            <param name="ios-package" value="CDVLocation" />
+        </feature>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
