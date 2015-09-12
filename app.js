@@ -77,9 +77,11 @@ Ext.application({
                 image:"http://webapi.amap.com/images/custom_a_j.png",//大图地址                 
                 imageOffset:new AMap.Pixel(-28,0)//相对于大图的取图位置                 
             })                 
-        });                 
+        });             
 
-        var isMarkerSet = false;
+        marker.setMap(map);
+
+
         addCloudLayer();
         
         //叠加云数据图层
@@ -139,11 +141,6 @@ Ext.application({
                     str += '精度：' + data.accuracy + ' 米\n';
                     str += '是否经过偏移：' + (data.isConverted ? '是' : '否') + '\n';
                     alert(str);*/
-                    if (!isMarkerSet)
-                    {
-                        isMarkerSet = true;
-                        marker.setMap(map);
-                    }
                     marker.setPosition(data.position);
 
 
@@ -157,7 +154,7 @@ Ext.application({
                         search.searchNearBy(data.position, 200, function(status, result) {
                             console.info(result);
                             if (status === 'complete' && result.info === 'OK') {
-                                alert(result.datas[0].mp3);
+                                alert('the current music is :'+result.datas[0].mp3);
                             }
                         });
                     });
@@ -196,6 +193,7 @@ Ext.application({
 
             function onDeviceReady() {
                 navigator.compass.watchHeading(onSuccess, onError);
+                //alert('deviceready');
             }
 
             // onSuccess: Get the current heading
@@ -208,14 +206,14 @@ Ext.application({
             // onError: Failed to get the heading
             //
             function onError(compassError) {
-                //alert('Compass Error: ' + compassError.code);
+                alert('Compass Error: ' + compassError.code);
             }
 
-            var media = new Media('/android_asset/www/resources/mp3/04.mp3', onSuccess, onError, onStatus);
+            var media = new Media('/android_asset/www/resources/mp3/04.mp3', onMediaSuccess, onMediaError, onMediaStatusChanged);
             media.play();
-            function onSuccess(){}
-            function onErr(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
-            function onStatus(oldStatus, newStatus){alert(oldStatus+newStatus);}
+            function onMediaSuccess(){}
+            function onMediaError(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
+            function onMediaStatusChanged(oldStatus, newStatus){alert('change status:'+oldStatus+newStatus);}
         }
 
         if (!window.console || !console.log) {alert("console.log not supported.");}
