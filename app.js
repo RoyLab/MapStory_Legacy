@@ -18,7 +18,7 @@ Ext.application({
     name: 'senchaApp1',
 
     requires: [
-        'Ext.MessageBox',
+        'Ext.MessageBox'
     ],
 
     views: [
@@ -51,7 +51,8 @@ Ext.application({
         Ext.Viewport.add(Ext.create('senchaApp1.view.Main'));
 
 
-        var position=new AMap.LngLat(118.850003,31.940681);
+        var position=new AMap.LngLat(121.44114,31.031569);
+        // HOME: 118.850003,31.940681
         // SJTU: 121.44114,31.031569
         //var b = new BMap.Bounds(new BMap.Point(121.43009,31.020088),
         //    new BMap.Point(121.462681,31.045555));
@@ -60,7 +61,7 @@ Ext.application({
             view: new AMap.View2D({//创建地图二维视口
               center:position,//创建中心点坐标
               zoom:14, //设置地图缩放级别
-              rotation:15 //设置地图旋转角度
+              rotation:0 //设置地图旋转角度
              }),
             resizeEnable: true,
             rotateEnable: true
@@ -68,7 +69,7 @@ Ext.application({
 
 
         var marker = new AMap.Marker({                 
-            position:new AMap.LngLat(118.850003,31.940681),//基点位置                 
+            position:position,//基点位置                 
             offset:new AMap.Pixel(-14,-34),//相对于基点的偏移位置
             rotation: 90,                 
             icon:new AMap.Icon({  //复杂图标                 
@@ -79,20 +80,53 @@ Ext.application({
         });                 
 
         var isMarkerSet = false;
+        addCloudLayer();
+        
+        //叠加云数据图层
+        function addCloudLayer() {
+            //加载云图层插件
+            map.plugin('AMap.CloudDataLayer', function () {
+                var layerOptions = { 
+                    //query:{keywords: '三'}, 
+                    clickable:true
+                };
+                var cloudDataLayer = new AMap.CloudDataLayer('55e433fce4b02580c5f3037c', layerOptions); //实例化云图层类
+                cloudDataLayer.setMap(map); //叠加云图层到地图
+
+                AMap.event.addListener(cloudDataLayer, 'click', function (result) {
+                    var clouddata = result.data;
+                    var infoWindow = new AMap.InfoWindow({
+                        content:"<h3><font face=\"微软雅黑\"color=\"#3366FF\">"+ clouddata._name +"</font></h3><hr />地址："+ clouddata._address + "<br />",
+                        size:new AMap.Size(300, 0),
+                        autoMove:true,
+                        offset:new AMap.Pixel(0,-25)
+                    });
+                    
+                    infoWindow.open(map, clouddata._location);
+                });
+            });
+        }
+
+
+        map.plugin(["AMap.ToolBar"], function () {
+              toolBar = new AMap.ToolBar();
+              map.addControl(toolBar);
+            });
+
 
         map.plugin('AMap.Geolocation', function () {
             geolocation = new AMap.Geolocation({
                 enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+                timeout: 3000,          //超过10秒后停止定位，默认：无穷大
                 maximumAge: 0,           //定位结果缓存0毫秒，默认：0
                 convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
                 showButton: true,        //显示定位按钮，默认：true
-                buttonPosition: 'RB',    //定位按钮停靠位置，默认：'LB'，左下角
+                buttonPosition: 'LT',    //定位按钮停靠位置，默认：'LB'，左下角
                 buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
                 showMarker: false,        //定位成功后在定位到的位置显示点标记，默认：true
                 showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
                 panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
-                zoomToAccuracy:true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+                zoomToAccuracy:false      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
             });
             map.addControl(geolocation);
             geolocation.watchPosition();
@@ -111,6 +145,24 @@ Ext.application({
                         marker.setMap(map);
                     }
                     marker.setPosition(data.position);
+
+
+                    var search;
+                    var searchOptions = {
+                        orderBy: '_id:ASC'
+                    };
+                    //加载CloudDataSearch服务插件
+                    AMap.service(["AMap.CloudDataSearch"], function() {
+                        search = new AMap.CloudDataSearch('55e433fce4b02580c5f3037c', searchOptions); //构造云数据检索类
+                        search.searchNearBy(data.position, 200, function(status, result) {
+                            console.info(result);
+                            if (status === 'complete' && result.info === 'OK') {
+                                alert(result.datas[0].mp3);
+                            }
+                        });
+                    });
+
+        
                 }
             );//返回定位信息
 
@@ -159,13 +211,14 @@ Ext.application({
                 //alert('Compass Error: ' + compassError.code);
             }
 
-            var media = new Media('/android_asset/www/resources/mp3/04.mp3');
-            //media.play();
-            //function onSuccess(){alert('end');}
-            //function onErr(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
+            var media = new Media('/android_asset/www/resources/mp3/04.mp3', onSuccess, onError, onStatus);
+            media.play();
+            function onSuccess(){}
+            function onErr(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
+            function onStatus(oldStatus, newStatus){alert(oldStatus+newStatus);}
         }
 
-        if (!window.console || !console.log) {alert("console.log not supported.")}
+        if (!window.console || !console.log) {alert("console.log not supported.");}
     },
 
     onUpdated: function() {

@@ -12,7 +12,7 @@ Ext.define('senchaApp1.view.Main', {
                 title: 'Map',
                 //styleHtmlContent: true,
                 scrollable: false,
-                layout:'vbox',
+                layout:'fit',
                 items: [{
                     docked: 'top',
                     xtype: 'titlebar',
@@ -20,11 +20,20 @@ Ext.define('senchaApp1.view.Main', {
                     },{
                       xtype:'panel',
                       id:'allmap',
-                      flex:1
+                      //flex:1
                     }
                 ]
  
-            }]
+            },
+            {
+                iconCls: 'action',
+                title: 'Video',
+                //styleHtmlContent: true,
+                scrollable: false,
+                layout:'vbox',
+                html:'hello kiki.'
+            }
+            ]
 
     } 
 });
