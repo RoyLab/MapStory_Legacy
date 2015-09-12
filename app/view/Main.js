@@ -11,16 +11,22 @@ Ext.define('senchaApp1.view.Main', {
                 iconCls: 'maps',
                 title: 'Map',
                 //styleHtmlContent: true,
-                scrollable: false,
-                layout:'fit',
+                scrollable: true,
+                layout:'vbox',
                 items: [{
                     docked: 'top',
                     xtype: 'titlebar',
                     title: '地图故事（校庆版）'
-                    },{
+                    },
+                    {
+                        xtype:'label',
+                        html:'hehe',
+                        flex:1
+                    },
+                    {
                       xtype:'panel',
                       id:'allmap',
-                      //flex:1
+                      flex:3
                     }
                 ]
  

@@ -48,8 +48,8 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('senchaApp1.view.Main'));
-
+        mapView = Ext.create('senchaApp1.view.Main');
+        Ext.Viewport.add(mapView);
 
         var position=new AMap.LngLat(121.44114,31.031569);
         // HOME: 118.850003,31.940681
@@ -119,7 +119,7 @@ Ext.application({
         map.plugin('AMap.Geolocation', function () {
             geolocation = new AMap.Geolocation({
                 enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                timeout: 3000,          //超过10秒后停止定位，默认：无穷大
+                timeout: 10000,          //超过10秒后停止定位，默认：无穷大
                 maximumAge: 0,           //定位结果缓存0毫秒，默认：0
                 convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
                 showButton: true,        //显示定位按钮，默认：true
@@ -209,8 +209,8 @@ Ext.application({
                 alert('Compass Error: ' + compassError.code);
             }
 
-            var media = new Media('/android_asset/www/resources/mp3/04.mp3', onMediaSuccess, onMediaError, onMediaStatusChanged);
-            media.play();
+            //var media = new Media(string, onMediaSuccess, onMediaError, onMediaStatusChanged);
+            //media.play();
             function onMediaSuccess(){}
             function onMediaError(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
             function onMediaStatusChanged(oldStatus, newStatus){alert('change status:'+oldStatus+newStatus);}
