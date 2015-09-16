@@ -16,7 +16,6 @@ function onDeviceReady() {
 
 Ext.application({
     name: 'senchaApp1',
-
     requires: [
         'Ext.MessageBox'
     ],
@@ -46,7 +45,6 @@ Ext.application({
     launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
-
         // Initialize the main view
         mapView = Ext.create('senchaApp1.view.Main');
         Ext.Viewport.add(mapView);
@@ -154,7 +152,7 @@ Ext.application({
                         search.searchNearBy(data.position, 200, function(status, result) {
                             console.info(result);
                             if (status === 'complete' && result.info === 'OK') {
-                                alert('the current music is :'+result.datas[0].mp3);
+                                //alert('the current music is :'+result.datas[0].mp3);
                             }
                         });
                     });

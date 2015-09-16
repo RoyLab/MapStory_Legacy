@@ -11,7 +11,7 @@ Ext.define('senchaApp1.view.Main', {
                 iconCls: 'maps',
                 title: 'Map',
                 //styleHtmlContent: true,
-                scrollable: true,
+                scrollable: false,
                 layout:'vbox',
                 items: [{
                     docked: 'top',
@@ -19,9 +19,30 @@ Ext.define('senchaApp1.view.Main', {
                     title: '地图故事（校庆版）'
                     },
                     {
-                        xtype:'label',
-                        html:'hehe',
-                        flex:1
+                      xtype : 'fieldset',
+                      title: 'Standard Slider Input',
+                      items : [
+                        {
+                          xtype: 'sliderfieldextended',
+                          name: 'slider_decimal',
+                          labelText: 'Decimal',
+                          label: 'Decimal',
+                          value: 3,
+                          minValue: 0,
+                          maxValue: 100,
+                          increment: 0.25
+                        },
+                        {
+                          xtype: 'sliderfieldextended',
+                          name: 'slider_integer',
+                          labelText: 'Integer',
+                          label: 'Integer',
+                          value: 9,
+                          minValue: 0,
+                          maxValue: 100
+                        }
+                      ],
+                      flex:2
                     },
                     {
                       xtype:'panel',
