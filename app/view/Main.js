@@ -2,7 +2,8 @@ Ext.define('senchaApp1.view.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'main',
     requires: [
-        'Ext.TitleBar'
+        'Ext.TitleBar',
+        ''
     ],
     config: {
         tabBarPosition: 'bottom',
@@ -16,40 +17,42 @@ Ext.define('senchaApp1.view.Main', {
                 items: [{
                     docked: 'top',
                     xtype: 'titlebar',
-                    title: '地图故事（校庆版）'
-                    },
-                    {
-                        layout:'hbox',
-                        items:[
-                        {
-                            xtype:'button',
-                            ui:'round',
-                            text:'Hi',
-                            width:'100'
-                        },
-                        {
-                            xtype: 'sliderfieldextended',
-                            name: 'slider_integer',
-                            value: 9,
-                            minValue: 0,
-                            maxValue: 100,
-                            flex:1
-                        }
-                        ]
-                    },
-                    {
-                        layout:'fit',
-                        items:[{
-                            xtype:'audioplayer',
-                            margin:20,
-                            title:'Sample MP3'
-                        }],
-                        flex:0
+                    title: 'MapStory'
                     },
                     {
                         xtype:'panel',
-                        id:'allmap',
-                        flex:1
+                        style: 'background-color: #FFFFFF;',
+                        styleHtmlContent: true,
+                        items:[
+                        {
+                            layout:'hbox',
+                            items:[
+                            {
+                                xtype:'button',
+                                ui:'round',
+                                text:'Play',
+                                width:'80px'
+                            },
+                            {
+                                type: 'Ext.slider.Single',
+                                name: 'slider_integer',
+                                value: 9,
+                                minValue: 0,
+                                maxValue: 100,
+                                flex:1
+                            }
+                            ]
+                        }]                   
+                    },
+                    {
+                        layout:'fit',
+                        styleHtmlContent: true,
+                        flex:1,    
+                        items:[{
+                            xtype:'panel',
+                            id:'allmap',
+                        }]
+
                     }
                 ]
             }]

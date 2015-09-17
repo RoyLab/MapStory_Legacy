@@ -44,7 +44,7 @@ Ext.define('senchaApp1.util.SliderFieldExtended', {
     var self = this;
     var originalConfig = self.callParent();
 
-    originalConfig.children[1].children = [{
+    /*originalConfig.children[1].children = [{
       reference: 'helper',
       tag: 'div',
       cls: Ext.baseCSSPrefix + 'slider-helper',
@@ -56,21 +56,21 @@ Ext.define('senchaApp1.util.SliderFieldExtended', {
         cls: Ext.baseCSSPrefix + 'slider-helper-input'
       }
       ]
-    }];
+    }];*/
 
     return originalConfig;
   },
   
   setHelperValue: function(value) {
     var value = value;
-    this.helperInput.dom.value = value;
+    //this.helperInput.dom.value = value;
   },
   
   // @private
   applyComponent: function(config) {
     var self = this;
-    self.helper.setStyle('float', self.config.helperPosition);
-    var changeValue = function(e) {
+    //self.helper.setStyle('float', self.config.helperPosition);
+    /*var changeValue = function(e) {
       var keycode = e.which || window.event.keyCode;
       if( [8, 9, 13, 37, 38, 39, 40, 46].indexOf(Number(keycode)) !== -1 ) return true;
       var helperInputValue = Number(self.helperInput.getValue());
@@ -89,7 +89,7 @@ Ext.define('senchaApp1.util.SliderFieldExtended', {
     self.helperInput.dom.onchange = changeValue;
     self.helperInput.dom.onclick = changeValue;
     self.helperInput.dom.onkeyup = changeValue;
-    self.setHelperValue(self.config.value);
+    self.setHelperValue(self.config.value);*/
     return Ext.factory(config, Ext.slider.Slider);
   },
 
@@ -108,7 +108,7 @@ Ext.define('senchaApp1.util.SliderFieldExtended', {
   },
 
   onSliderDragEnd: function(me, thumb, newValue, oldValue) {
-    this.fireEvent('dragend', this, thumb, newValue, oldValue);
+     this.fireEvent('dragend', this, thumb, newValue, oldValue);
   },
 
   /**
