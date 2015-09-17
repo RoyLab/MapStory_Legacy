@@ -659,6 +659,7 @@ Ext.ClassManager.addNameAlternateMappings({
     "Ext.viewport.WP"
   ],
   "senchaApp1.model.User": [],
+  "senchaApp1.util.SliderFieldExtended": [],
   "senchaApp1.view.Main": []
 });
 
@@ -1378,6 +1379,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
   "senchaApp1.model.User": [],
+  "senchaApp1.util.SliderFieldExtended": [
+    "widget.sliderfieldextended"
+  ],
   "senchaApp1.view.Main": [
     "widget.main"
   ]

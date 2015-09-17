@@ -19,48 +19,41 @@ Ext.define('senchaApp1.view.Main', {
                     title: '地图故事（校庆版）'
                     },
                     {
-                      xtype : 'fieldset',
-                      title: 'Standard Slider Input',
-                      items : [
+                        layout:'hbox',
+                        items:[
                         {
-                          xtype: 'sliderfieldextended',
-                          name: 'slider_decimal',
-                          labelText: 'Decimal',
-                          label: 'Decimal',
-                          value: 3,
-                          minValue: 0,
-                          maxValue: 100,
-                          increment: 0.25
+                            xtype:'button',
+                            ui:'round',
+                            text:'Hi',
+                            width:'100'
                         },
                         {
-                          xtype: 'sliderfieldextended',
-                          name: 'slider_integer',
-                          labelText: 'Integer',
-                          label: 'Integer',
-                          value: 9,
-                          minValue: 0,
-                          maxValue: 100
+                            xtype: 'sliderfieldextended',
+                            name: 'slider_integer',
+                            value: 9,
+                            minValue: 0,
+                            maxValue: 100,
+                            flex:1
                         }
-                      ],
-                      flex:2
+                        ]
                     },
                     {
-                      xtype:'panel',
-                      id:'allmap',
-                      flex:3
+                        layout:'fit',
+                        items:[{
+                            xtype:'audioplayer',
+                            margin:20,
+                            title:'Sample MP3'
+                        }],
+                        flex:0
+                    },
+                    {
+                        xtype:'panel',
+                        id:'allmap',
+                        flex:1
                     }
                 ]
+            }]
  
-            },
-            {
-                iconCls: 'action',
-                title: 'Video',
-                //styleHtmlContent: true,
-                scrollable: false,
-                layout:'vbox',
-                html:'hello kiki.'
-            }
-            ]
-
-    } 
-});
+        }
+    }
+);
