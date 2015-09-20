@@ -11,54 +11,56 @@ Ext.define('senchaApp1.view.AudioPlayer',{
 
 
 	play: function(fileName, length){
-		function onMediaSuccess(){};
+
+		var loaded = true;
+		this.audioLen = length;
 
     	function onMediaError(e){
-	    	var str = ''; 
-	    	for (i in e) {
-	    		str += i
-	    	};
-	    	alert('error'+ e.code);
+    		loaded = false;
+	    	console.log(e);
+	    	alert('Error: '+ e.code);
 	    };
 
-	    function onMediaStatusChanged(oldStatus, newStatus){
-	    	alert('change status:'+oldStatus+newStatus);
+	    function onMediaStatusChanged(newStatus){
+	    	if (newStatus == Media.MEDIA_STOPPED)
+				clearInterval(timer);	
 	    };
 
 		try{
-			var player = new Media(fileName, onMediaSuccess, onMediaError, onMediaStatusChanged);
+			this.mp3player = new Media('/android_asset/www/'+fileName, null, onMediaError, onMediaStatusChanged);
 		}
 		catch(err){
 			console.error('No Media support found.')
-			var webPlayer = true;
-		}
-		///android_asset/www/resources/mp3/04.mp3
-
-		if (webPlayer){
-		    var player = Ext.create('Ext.Audio',{
+			this.webPlayer = true;
+		    this.mp3player = Ext.create('Ext.Audio',{
 		    	url:fileName,
 		    	hidden:true,
 		    	listeners:{
-		    		ended:function(){clearInterval(timer);alert('stop');}
+		    		ended:function(){clearInterval(timer);}
 		    	}
-		    });			
-			player.play();
-			var timer = setInterval(
-				function(){
-					var slider = Ext.getCmp('player');
-					slider.setValue(100*player.getCurrentTime()/length);
-					console.log(player.getCurrentTime());
-				},
-				500
-			)
+		    });
 		}
+		///android_asset/www/resources/mp3/04.mp3
 
-		if (player != undefined || player != null){
-			this.setValue(0);
-
+		if (this.mp3player && loaded){
+			this.mp3player.play();
+			var timer = setInterval(this.updateSlider, 500);
 		}
+	},
 
+	updateSlider: function(){
+		var slider = Ext.getCmp('player');
+		if (!slider) alert('Wrong');
 
+		if (slider.webPlayer){
+	    	slider.setValue(100*slider.mp3player.getCurrentTime()/slider.audioLen);
+	    }
+		else{
+			var time = 0;
+			slider.mp3player.getCurrentPosition(function(t){
+				slider.setValue(100*t/slider.audioLen);
+			});
+		}
 
 	},
 

@@ -185,7 +185,7 @@ Ext.application({
             );      //返回定位出错信息
         });
         
-
+        alert('create Media');
         var player = Ext.getCmp('player');
         player.play('resources/mp3/03.mp3', 14);
 
