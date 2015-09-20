@@ -73,7 +73,8 @@ Ext.application({
             icon:new AMap.Icon({  //复杂图标                 
                 size:new AMap.Size(28,37),//图标大小                 
                 image:"http://webapi.amap.com/images/custom_a_j.png",//大图地址                 
-                imageOffset:new AMap.Pixel(-28,0)//相对于大图的取图位置                 
+                imageOffset:new AMap.Pixel(-28,0)//相对于大图的取图位置
+                //"resources/icons/arrow_icon.png"            
             })                 
         });             
 
@@ -183,37 +184,24 @@ Ext.application({
                 }
             );      //返回定位出错信息
         });
+        
 
+        var player = Ext.getCmp('player');
+        player.play('resources/mp3/03.mp3', 14);
 
         if (Ext.os.is.Android)
         {
             document.addEventListener("deviceready", onDeviceReady, false);
 
             function onDeviceReady() {
-                navigator.compass.watchHeading(onSuccess, onError);
+                navigator.compass.watchHeading(onSuccess, null);
                 //alert('deviceready');
             }
 
-            // onSuccess: Get the current heading
-            //
             function onSuccess(heading) {
                 marker.setRotation(heading.magneticHeading);
-                //alert('Heading: ' + heading.magneticHeading);
             }
-
-            // onError: Failed to get the heading
-            //
-            function onError(compassError) {
-                alert('Compass Error: ' + compassError.code);
-            }
-
-            //var media = new Media(string, onMediaSuccess, onMediaError, onMediaStatusChanged);
-            //media.play();
-            function onMediaSuccess(){}
-            function onMediaError(e){var str = ''; for (i in e) {str += i}; alert('error'+ e.code);}
-            function onMediaStatusChanged(oldStatus, newStatus){alert('change status:'+oldStatus+newStatus);}
         }
-
         if (!window.console || !console.log) {alert("console.log not supported.");}
     },
 

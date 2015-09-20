@@ -3,7 +3,7 @@ Ext.define('senchaApp1.view.Main', {
     xtype: 'main',
     requires: [
         'Ext.TitleBar',
-        ''
+        'senchaApp1.view.AudioPlayer'
     ],
     config: {
         tabBarPosition: 'bottom',
@@ -12,47 +12,47 @@ Ext.define('senchaApp1.view.Main', {
                 iconCls: 'maps',
                 title: 'Map',
                 //styleHtmlContent: true,
+                //id:'mapmap',
                 scrollable: false,
                 layout:'vbox',
-                items: [{
-                    docked: 'top',
-                    xtype: 'titlebar',
-                    title: 'MapStory'
+                items: [
+                    {
+                        docked: 'top',
+                        xtype: 'titlebar',
+                        title: 'MapStory',
+                        id:'appTitle'
                     },
                     {
-                        xtype:'panel',
-                        style: 'background-color: #FFFFFF;',
+                        layout:'hbox',
                         styleHtmlContent: true,
+                        style: 'background-color: #FFFFFF;',
                         items:[
-                        {
-                            layout:'hbox',
-                            items:[
                             {
                                 xtype:'button',
                                 ui:'round',
                                 text:'Play',
-                                width:'80px'
+                                width:'80px',
+                                handler:function(){
+                                    if (this.getText() == 'Play'){
+                                        this.setText('Pause');
+                                    }
+                                    else{
+                                        this.setText('Play');
+                                    }
+                                }
                             },
                             {
-                                type: 'Ext.slider.Single',
-                                name: 'slider_integer',
-                                value: 9,
-                                minValue: 0,
-                                maxValue: 100,
-                                flex:1
+                                xtype: 'mp3player',
+                                id:'player',
+                                flex:1,
                             }
-                            ]
-                        }]                   
+                        ]          
                     },
                     {
-                        layout:'fit',
+                        xtype:'panel',
+                        id:'allmap',
                         styleHtmlContent: true,
-                        flex:1,    
-                        items:[{
-                            xtype:'panel',
-                            id:'allmap',
-                        }]
-
+                        flex:1,
                     }
                 ]
             }]
