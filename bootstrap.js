@@ -660,6 +660,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "senchaApp1.model.User": [],
   "senchaApp1.view.AudioPlayer": [],
+  "senchaApp1.view.DTPlayer": [],
   "senchaApp1.view.Main": []
 });
 
@@ -1381,6 +1382,9 @@ Ext.ClassManager.addNameAliasMappings({
   "senchaApp1.model.User": [],
   "senchaApp1.view.AudioPlayer": [
     "widget.mp3player"
+  ],
+  "senchaApp1.view.DTPlayer": [
+    "widget.dtplayer"
   ],
   "senchaApp1.view.Main": [
     "widget.main"

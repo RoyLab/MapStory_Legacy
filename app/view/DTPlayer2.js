@@ -1,0 +1,44 @@
+Ext.define('senchaApp1.view.DTPlayer2', {
+    extend: 'Ext.Container',
+    xtype: 'main',
+    requires: [
+        'Ext.Img',
+        'Ext.Carousel',
+        'Ext.Label',
+    ],
+
+    config: {
+
+        id:'player2i',
+
+        layout:'vbox',
+
+        showAnimation:'slide',
+
+        items:[{
+            xtype:'titlebar',
+            docked:'top',
+        },
+        {
+            xtype:'carousel',
+            border:5,
+            flex:1,
+            items:[{
+                xtype:'image',
+                layout:'fill',
+                src:'resources/images/album.jpg',
+
+            },
+            {
+                xtype:'image',
+                layout:'fill',
+                src:'resources/images/album2.jpg',
+            }]
+        },
+        {
+            xtype:'button',
+            text:'fdafdfasd'
+        }]
+
+    }
+});

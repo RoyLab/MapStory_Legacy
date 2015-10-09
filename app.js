@@ -22,6 +22,7 @@ Ext.application({
 
     views: [
         'Main',
+        'DTPlayer2',
     ],
 
     icon: {
@@ -47,6 +48,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
         // Initialize the main view
         mapView = Ext.create('senchaApp1.view.Main');
+        mapView2 = Ext.create('senchaApp1.view.DTPlayer2');
         Ext.Viewport.add(mapView);
 
         var position=new AMap.LngLat(121.44114,31.031569);
@@ -185,9 +187,9 @@ Ext.application({
             );      //返回定位出错信息
         });
         
-        alert('create Media');
-        var player = Ext.getCmp('player');
-        player.play('resources/mp3/03.mp3', 14);
+        //alert('create Media');
+        //var player = Ext.getCmp('player');
+        //player.play('resources/mp3/03.mp3', 14);
 
         if (Ext.os.is.Android)
         {
