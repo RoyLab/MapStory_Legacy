@@ -1,5 +1,5 @@
 Ext.define('senchaApp1.view.Main', {
-    extend: 'Ext.Container',
+    extend: 'Ext.NavigationView',
     xtype: 'main',
     requires: [
         'Ext.TitleBar',
@@ -7,21 +7,30 @@ Ext.define('senchaApp1.view.Main', {
     ],
     config: {
 
-        layout:'vbox',
+        id:'mainview',
 
-        hideAnimation:'slideOut',
+        items:[
+        {
+            xtype:'container',
+            title:'MapStory',
+            layout:'vbox',
 
-        items: [
-            {
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'MapStory',
-                id:'appTitle'
-            },
-            {
-                xtype:'dtplayer',
-                docked:'bottom',
-            },
+            items: [
+               /* {
+                    xtype:'button',
+                    text:'fdafdfa',
+                    flex:1
+                },*/
+                  {
+                    xtype:'dtplayer',
+                    docked:'bottom',
+                    flex:1
+                },               {
+                    xtype:'panel',
+                    id:'allmap',
+                    flex:1
+                },
+            ] 
             /*{
                 layout:'hbox',
                 styleHtmlContent: true,
@@ -48,13 +57,7 @@ Ext.define('senchaApp1.view.Main', {
                     }
                 ]          
             },*/
-            {
-                xtype:'panel',
-                id:'allmap',
-                styleHtmlContent: true,
-                flex:1,
-            }
-        ] 
-        }
+
+        }],
     }
-);
+});

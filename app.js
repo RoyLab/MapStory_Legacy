@@ -48,7 +48,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
         // Initialize the main view
         mapView = Ext.create('senchaApp1.view.Main');
-        mapView2 = Ext.create('senchaApp1.view.DTPlayer2');
+        //mapView2 = Ext.create('senchaApp1.view.DTPlayer2');
         Ext.Viewport.add(mapView);
 
         var position=new AMap.LngLat(121.44114,31.031569);

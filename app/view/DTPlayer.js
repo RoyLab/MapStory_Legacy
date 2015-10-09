@@ -61,7 +61,7 @@ Ext.define('senchaApp1.view.DTPlayer', {
                     //event: 'tap',
                     fn: function() {
                         console.log('fdasfdsfad');
-                        Ext.Viewport.setActiveItem(Ext.getCmp('player2i'));
+                        Ext.getCmp('mainview').push(Ext.create('senchaApp1.view.DTPlayer2'));
                     }
                 }
             }

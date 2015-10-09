@@ -11,14 +11,13 @@ Ext.define('senchaApp1.view.DTPlayer2', {
 
         id:'player2i',
 
+        title:'terst',
+
         layout:'vbox',
 
         showAnimation:'slide',
 
-        items:[{
-            xtype:'titlebar',
-            docked:'top',
-        },
+        items:[
         {
             xtype:'carousel',
             border:5,
